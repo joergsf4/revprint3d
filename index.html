@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>RevPrint3D – Familieneditor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="ribbon">
+  <div class="group">
+    <div class="buttons">
+      <button data-cmd="new" title="Neue Familie">📄<span>Neu</span></button>
+      <button data-cmd="open" title="Familie öffnen (.rp3d.json)">📂<span>Öffnen</span></button>
+      <button data-cmd="save" title="Familie als Datei speichern">💾<span>Speichern unter</span></button>
+    </div>
+    <label>Datei</label>
+  </div>
+  <div class="group" id="grp-modify">
+    <div class="buttons">
+      <button data-cmd="modify" class="active" title="Ändern (Esc)">↖<span>Ändern</span></button>
+    </div>
+    <label>Auswählen</label>
+  </div>
+  <div class="group" id="grp-create">
+    <div class="buttons">
+      <button data-cmd="extrusion" title="Extrusion erstellen">⬛<span>Extrusion</span></button>
+    </div>
+    <label>Formen</label>
+  </div>
+  <div class="group" id="grp-props">
+    <div class="buttons">
+      <button data-cmd="types" title="Familientypen und Parameter">🗂<span>Familientypen</span></button>
+    </div>
+    <label>Eigenschaften</label>
+  </div>
+  <div class="group" id="grp-export">
+    <div class="buttons">
+      <select id="scale" title="Maßstab für den 3D-Druck">
+        <option value="1">1:1</option>
+        <option value="10">1:10</option>
+        <option value="20" selected>1:20</option>
+        <option value="50">1:50</option>
+        <option value="100">1:100</option>
+      </select>
+      <button data-cmd="stl" title="STL für den 3D-Druck exportieren">🖨<span>STL exportieren</span></button>
+    </div>
+    <label>3D-Druck</label>
+  </div>
+  <!-- Kontextregister im Skizzenmodus, wie „Ändern | Extrusion erstellen“ -->
+  <div class="group context" id="grp-draw" hidden>
+    <div class="buttons">
+      <button data-cmd="sk-select" title="Skizzenlinien auswählen">↖<span>Ändern</span></button>
+      <button data-cmd="sk-line" title="Linie (Polylinie, schließen durch Klick auf den Startpunkt)">╱<span>Linie</span></button>
+      <button data-cmd="sk-rect" title="Rechteck">▭<span>Rechteck</span></button>
+    </div>
+    <label>Zeichnen</label>
+  </div>
+  <div class="group context" id="grp-mode" hidden>
+    <div class="buttons">
+      <button data-cmd="sk-finish" class="ok" title="Bearbeitungsmodus beenden">✔<span>Beenden</span></button>
+      <button data-cmd="sk-cancel" class="cancel" title="Bearbeitungsmodus abbrechen">✘<span>Abbrechen</span></button>
+    </div>
+    <label>Modus</label>
+  </div>
+</header>
+
+<main>
+  <aside>
+    <section class="palette">
+      <h2>Eigenschaften</h2>
+      <div id="props"></div>
+    </section>
+    <section class="palette">
+      <h2>Projektbrowser</h2>
+      <ul id="browser">
+        <li class="head">Grundrisse</li>
+        <li data-view="grundriss">Referenzebene</li>
+        <li class="head">Ansichten</li>
+        <li data-view="vorne">Vorne</li>
+        <li data-view="rechts">Rechts</li>
+        <li class="head">3D-Ansichten</li>
+        <li data-view="3d">{3D}</li>
+      </ul>
+    </section>
+  </aside>
+  <div id="view">
+    <div id="view-title"></div>
+    <div id="typed" hidden></div>
+    <button id="zoom-fit" title="Zoom: Grenzen (Doppelklick mittlere Maustaste)">⤢ Zoom Grenzen</button>
+  </div>
+</main>
+
+<footer id="status">Bereit</footer>
+
+<dialog id="types-dialog">
+  <form method="dialog">
+    <h3>Familientypen</h3>
+    <table>
+      <thead><tr><th>Parameter</th><th>Wert / Formel</th><th>Ergebnis</th><th></th></tr></thead>
+      <tbody id="types-body"></tbody>
+    </table>
+    <p class="hint">Namen ohne Leerzeichen. Formeln wie in Revit, z.&nbsp;B. <code>Breite - 2 * Rahmen</code>. Einheit: mm.</p>
+    <div class="dialog-buttons">
+      <button type="button" id="types-add">Neuer Parameter</button>
+      <button value="ok">OK</button>
+    </div>
+  </form>
+</dialog>
+
+<input type="file" id="file-input" accept=".json" hidden>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/STLExporter.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

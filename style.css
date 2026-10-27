@@ -1,0 +1,93 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  display: flex; flex-direction: column;
+  font: 12px "Segoe UI", system-ui, sans-serif;
+  color: #222; background: #e9ecef;
+}
+button, select, input { font: inherit; }
+
+/* Multifunktionsleiste */
+.ribbon {
+  display: flex; gap: 2px; padding: 4px 4px 0;
+  background: #f5f6f7; border-bottom: 1px solid #b9bec4;
+}
+.group {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 2px 6px 0; border-right: 1px solid #d3d7db;
+}
+.group.context { background: #e3f0d6; }
+.group > label {
+  text-align: center; color: #555; font-size: 11px;
+  padding: 2px 0; border-top: 1px solid #d3d7db; margin-top: 2px;
+}
+.buttons { display: flex; gap: 2px; align-items: center; }
+.buttons button {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 58px; padding: 3px 4px; font-size: 20px; line-height: 1.1;
+  background: none; border: 1px solid transparent; border-radius: 2px; cursor: pointer;
+}
+.buttons button span { font-size: 11px; margin-top: 2px; }
+.buttons button:hover { background: #dbe9f6; border-color: #a9c9e8; }
+.buttons button.active { background: #c5dcf2; border-color: #7fb0dc; }
+.buttons button.ok { color: #2a8a2a; }
+.buttons button.cancel { color: #c22; }
+#scale { height: 26px; }
+
+main { flex: 1; display: flex; min-height: 0; }
+
+/* Paletten links */
+aside {
+  width: 260px; display: flex; flex-direction: column; gap: 4px; padding: 4px;
+  background: #e9ecef; border-right: 1px solid #b9bec4; overflow-y: auto;
+}
+.palette { background: #fff; border: 1px solid #b9bec4; }
+.palette h2 {
+  margin: 0; padding: 4px 6px; font-size: 12px; font-weight: 600;
+  background: #dfe3e8; border-bottom: 1px solid #b9bec4;
+}
+#props table { width: 100%; border-collapse: collapse; }
+#props td { padding: 2px 4px; border-bottom: 1px solid #eee; }
+#props td:first-child { width: 45%; color: #444; }
+#props th { text-align: left; padding: 3px 4px; background: #f0f2f4; font-weight: 600; }
+#props input { width: 100%; padding: 1px 3px; border: 1px solid #ccc; }
+#props input.error { border-color: #c22; background: #fdeaea; }
+#props .actions { padding: 6px 4px; display: flex; gap: 4px; flex-wrap: wrap; }
+#props .empty { padding: 6px; color: #777; }
+
+#browser { list-style: none; margin: 0; padding: 4px 0; }
+#browser li { padding: 2px 6px 2px 22px; cursor: pointer; }
+#browser li.head { padding-left: 8px; font-weight: 600; cursor: default; }
+#browser li[data-view]:hover { background: #dbe9f6; }
+#browser li.active { background: #c5dcf2; font-weight: 600; }
+
+/* Zeichenfläche */
+#view { flex: 1; position: relative; background: #fff; overflow: hidden; }
+#view canvas { display: block; }
+#view-title {
+  position: absolute; left: 8px; top: 6px; pointer-events: none;
+  color: #555; font-weight: 600;
+}
+#zoom-fit { position: absolute; right: 8px; bottom: 8px; }
+#typed {
+  position: absolute; pointer-events: none; padding: 1px 4px;
+  background: #fff; border: 1px solid #c0c; color: #c0c;
+}
+
+#status {
+  padding: 3px 8px; background: #f5f6f7; border-top: 1px solid #b9bec4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#status.error { background: #fdeaea; color: #a00; }
+
+dialog { border: 1px solid #888; padding: 12px; min-width: 460px; }
+dialog h3 { margin: 0 0 8px; font-size: 13px; }
+dialog table { width: 100%; border-collapse: collapse; }
+dialog th { text-align: left; background: #f0f2f4; padding: 3px 4px; }
+dialog td { padding: 2px 4px; }
+dialog input { width: 100%; }
+dialog td.result { width: 80px; text-align: right; color: #555; }
+dialog td.result.error { color: #c22; }
+.hint { color: #666; }
+.dialog-buttons { display: flex; justify-content: space-between; }
