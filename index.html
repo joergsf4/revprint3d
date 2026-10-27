@@ -23,7 +23,10 @@
   </div>
   <div class="group" id="grp-create">
     <div class="buttons">
-      <button data-cmd="extrusion" title="Extrusion erstellen">⬛<span>Extrusion</span></button>
+      <button data-cmd="extrusion" title="Extrusion: Kontur gerade herausziehen">⬛<span>Extrusion</span></button>
+      <button data-cmd="blend" title="Verschmelzung: unten eine Kontur, oben eine andere">⏢<span>Verschmelzung</span></button>
+      <button data-cmd="rotation" title="Rotation: Profil um die senkrechte Referenzebene drehen">◎<span>Rotation</span></button>
+      <button data-cmd="sweep" title="Sweep: Profil entlang eines Pfads führen">〰<span>Sweep</span></button>
     </div>
     <label>Formen</label>
   </div>
@@ -51,12 +54,15 @@
     <div class="buttons">
       <button data-cmd="sk-select" title="Skizzenlinien auswählen">↖<span>Ändern</span></button>
       <button data-cmd="sk-line" title="Linie (Polylinie, schließen durch Klick auf den Startpunkt)">╱<span>Linie</span></button>
-      <button data-cmd="sk-rect" title="Rechteck">▭<span>Rechteck</span></button>
+      <button data-cmd="sk-rect" title="Rechteck: Ecke zu Ecke">▭<span>Rechteck</span></button>
+      <button data-cmd="sk-circle" title="Kreis: Mittelpunkt, dann Radius">◯<span>Kreis</span></button>
+      <button data-cmd="sk-ngon" title="Vieleck: Mittelpunkt, dann Radius (Ecken in den Eigenschaften)">⬡<span>Vieleck</span></button>
     </div>
     <label>Zeichnen</label>
   </div>
   <div class="group context" id="grp-mode" hidden>
     <div class="buttons">
+      <button data-cmd="sk-top" title="Zwischen den beiden Skizzen wechseln">⇅<span>Oben bearbeiten</span></button>
       <button data-cmd="sk-finish" class="ok" title="Bearbeitungsmodus beenden">✔<span>Beenden</span></button>
       <button data-cmd="sk-cancel" class="cancel" title="Bearbeitungsmodus abbrechen">✘<span>Abbrechen</span></button>
     </div>

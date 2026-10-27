@@ -1,12 +1,12 @@
 # RevPrint3D
 
-**3D-Druck für Revit-Leute.** Ein kleiner Familieneditor im Browser, der sich wie der Revit-Familieneditor bedient. Man skizziert, extrudiert und steuert alles über Parameter und Formeln. Am Ende steht eine STL-Datei für den 3D-Drucker.
+**3D-Druck für Revit-Leute.** Ein kleiner Familieneditor im Browser, der sich wie der Revit-Familieneditor bedient. Man skizziert, formt Körper mit Extrusion, Verschmelzung, Rotation und Sweep und steuert alles über Parameter und Formeln. Am Ende steht eine STL-Datei für den 3D-Drucker.
 
 Wer Revit kann, muss kein neues CAD-Programm lernen, um ein Namensschild, einen Stiftehalter oder ein kleines Häuschen zu drucken.
 
 **👉 Direkt ausprobieren: https://joergsf4.github.io/revprint3d/**
 
-![RevPrint3D: 3D-Ansicht mit Sockel und Häuschen](docs/screenshot.png)
+![RevPrint3D: Platte mit Loch, Vase, Sweep-Rohr und Verschmelzung in der 3D-Ansicht](docs/screenshot.png)
 
 ## Starten
 
@@ -20,8 +20,9 @@ Getestet mit aktuellem Chrome und Edge.
 | In Revit | In RevPrint3D |
 |---|---|
 | Projektbrowser: Grundriss, Ansichten, {3D} | Projektbrowser links: Referenzebene, Vorne, Rechts, {3D} |
-| Erstellen › Extrusion | Multifunktionsleiste › **Extrusion** (die Arbeitsebene ist die aktuelle Ansicht) |
-| Skizzenmodus mit Linie/Rechteck, ✔ / ✘ | Gleich. Innere geschlossene Konturen werden zu **Öffnungen** |
+| Erstellen › Formen | **Extrusion**, **Verschmelzung**, **Rotation**, **Sweep** (die Arbeitsebene ist die aktuelle Ansicht) |
+| Skizzenmodus mit Linie, Rechteck, Kreis, Vieleck, ✔ / ✘ | Gleich. Innere geschlossene Konturen werden zu **Öffnungen** |
+| Zeichnen mit Klick, Klick | Geht genauso, zusätzlich Drücken, Ziehen, Loslassen |
 | Länge eintippen + Enter | Beim Linienwerkzeug: Zahl tippen, Enter setzt den Punkt in Mausrichtung |
 | Familientypen, Formeln | **Familientypen**: Parameter mit Formeln, z. B. `Breite - 2 * Rahmen` |
 | Eigenschaften-Palette | Extrusionsanfang/-ende und Skizzenmaße als Zahl oder Formel |
@@ -29,6 +30,13 @@ Getestet mit aktuellem Chrome und Edge.
 | Mittlere Maustaste / Umschalt + Mitte | Verschieben / 3D-Ansicht drehen, Mausrad zoomt |
 
 Alle Maße sind in **mm**.
+
+### Die vier Formen
+
+- **Extrusion:** Kontur gerade herausziehen, zwischen Extrusionsanfang und -ende.
+- **Verschmelzung:** Basis skizzieren, dann **Oben bearbeiten** und die obere Kontur zeichnen, z. B. unten ein Quadrat und oben ein Kreis. Beide Skizzen brauchen genau eine Kontur.
+- **Rotation:** Profil auf einer Seite der senkrechten grünen Referenzebene zeichnen. Um diese Achse wird es einmal ganz herumgedreht, ideal für Vasen, Kegel und Figuren.
+- **Sweep:** Erst den Pfad zeichnen: eine offene Linie (mit Enter oder ✔ beenden) oder eine geschlossene Kontur. Dann **Profil bearbeiten** und den Querschnitt um den Kreuzungspunkt der Referenzebenen zeichnen (X = seitlich zum Pfad, Y = Höhe). An Ecken wird auf Gehrung geschnitten.
 
 ## Tipps für den 3D-Druck
 
@@ -43,7 +51,7 @@ Die aktuelle Familie wird automatisch im Browser gespeichert. **Speichern unter*
 
 ## Was (noch) fehlt
 
-Abzugskörper, Rotation, Sweep, Verschmelzung, Bögen, Rückgängig sowie eigene Referenzebenen mit Bemaßungen. Wünsche gern als [Issue](https://github.com/joergsf4/revprint3d/issues).
+Abzugskörper (Löcher durch andere Körper schneiden), Bögen, Teil-Rotationen unter 360°, Rückgängig sowie eigene Referenzebenen mit Bemaßungen. Wünsche gern als [Issue](https://github.com/joergsf4/revprint3d/issues).
 
 ## Technik
 
@@ -51,7 +59,7 @@ Reines HTML, CSS und JavaScript ohne Build-Schritt. Gerendert wird mit [three.js
 
 ```
 index.html   Oberfläche
-app.js       Modell, Formeln, Skizzen, Ansichten, STL-Export
+app.js       Modell, Formeln, Formen, Skizzen, Ansichten, STL-Export
 style.css    Revit-Optik
 vendor/      three.js r147 (MIT)
 ```
